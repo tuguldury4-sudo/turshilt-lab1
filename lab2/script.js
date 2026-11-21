@@ -1,0 +1,15 @@
+// Алхам 2: Анхны тест — BASELINE хэмжилт
+// Бай (target): https://test.k6.io — k6-ийн албан ёсны дадлагын сайт (зөвшөөрөгдсөн бай)
+import http from 'k6/http';
+import { sleep, check } from 'k6';
+
+export const options = {
+  vus: 5,
+  duration: '30s',
+};
+
+export default function () {
+  const response = http.get('https://test.k6.io');
+  check(response, { 'status 200 байна': (r) => r.status === 200 });
+  sleep(1);
+}
